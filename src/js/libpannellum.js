@@ -863,7 +863,7 @@ function Renderer(container, context) {
             if (isPreview && program.currentNodes.length >= 6) {
                 drawPreview = false;
                 for (var i = 0; i < 6; i++) {
-                    if (!program.currentNodes[i].textureLoaded) {
+                    if (!program.currentNodes[i].isDrawFinish) {
                         drawPreview = true;
                         break;
                     }
@@ -1091,6 +1091,7 @@ function Renderer(container, context) {
                     // Bind texture and draw tile
                     gl.bindTexture(gl.TEXTURE_2D, program.currentNodes[i].texture); // Bind program.currentNodes[i].texture to TEXTURE0
                     gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+                    program.currentNodes[i].isDrawFinish = true
                 }
             }
             program.drawInProgress = false;
